@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+
+  kafkatool-restapi:
+    environment:
+      ENV: E1
+
+  kafkatool-webapp:
+    environment:
+      ENV: E1

@@ -1,0 +1,54 @@
+version: '3.8'
+
+networks:
+  rmoff_kafka:
+    name: rmoff_kafka
+
+services:
+
+  kafkatool-restapi:
+    container_name: kafkatool-restapi
+    build:
+      context: .
+      dockerfile: restapi.Dockerfile
+      args:
+        - APIGEE_CLIENT_ID=${apigeeClientId}
+        - APIGEE_CLIENT_SECRET=${apigeeClientSecret}
+        - KAFKA_KEYSTORE_PASSWORD=${kafkaKeystorePassword}
+        - KAFKA_KEY_PASSWORD=${kafkaKeyPassword}
+        - KAFKA_TRUSTSTORE_PASSWORD=${kafkaTruststorePassword}
+        - KAFKA_KEYSTORE_PATH=${kafkaKeystorePath}
+        - KAFKA_KEYSTORE_FILE=${kafkaKeystoreFile}
+        - KAFKA_GROUP_ID=${kafkaToolGroupId}
+        - HTTP_PROXY=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
+        - NO_PROXY=${NO_PROXY}
+    networks:
+      - rmoff_kafka
+    ports:
+      - "8090:8090"
+
+  kafkatool-webapp:
+    container_name: kafkatool-webapp
+    build:
+      context: .
+      dockerfile: webapp.Dockerfile
+      args:
+        - APIGEE_CLIENT_ID=${apigeeClientId}
+        - APIGEE_CLIENT_SECRET=${apigeeClientSecret}
+        - KAFKA_KEYSTORE_PASSWORD=${kafkaKeystorePassword}
+        - KAFKA_KEY_PASSWORD=${kafkaKeyPassword}
+        - KAFKA_TRUSTSTORE_PASSWORD=${kafkaTruststorePassword}
+        - KAFKA_KEYSTORE_PATH=${kafkaKeystorePath}
+        - KAFKA_KEYSTORE_FILE=${kafkaKeystoreFile}
+        - HTTP_PROXY=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
+        - NO_PROXY=${NO_PROXY}
+    environment:
+      REST_API_URL: "http://kafkatool-restapi:8090/topics"
+    networks:
+      - rmoff_kafka
+    depends_on:
+      - kafkatool-restapi
+    ports:
+      - "9080:9080"

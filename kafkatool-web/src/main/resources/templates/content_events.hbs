@@ -1,0 +1,38 @@
+{{<base_events}}
+    {{$header}}
+        {{<header}}
+            {{$title}}Kafka Tool{{/title}}
+        {{/header}}
+    {{/header}}
+    {{$content_events}}
+        <div id="events-container">
+            {{#eventvm.events}}
+                <table class="table table-bordered table-dark table-hover">
+                    <thead>
+                    <tr>
+                        <th colspan="6">{{name}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="attribute-name">id:</td>
+                        <td class="attribute-value">{{id}}</td>
+                        <td class="attribute-name">domain:</td>
+                        <td class="attribute-value">{{domain}}</td>
+                        <td class="attribute-name">service:</td>
+                        <td class="attribute-value">{{service}}</td>
+                    </tr>
+                    <tr>
+                        <td class="attribute-name">correlationId:</td>
+                        <td class="attribute-value">{{correlationId}}</td>
+                        <td class="attribute-name">originatorId:</td>
+                        <td class="attribute-value">{{originatorId}}</td>
+                        <td class="attribute-name">timestamp:</td>
+                        <td class="attribute-value">{{timestampAsLocalDateTime}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            {{/eventvm.events}}
+        </div>
+    {{/content_events}}
+{{/base_events}}

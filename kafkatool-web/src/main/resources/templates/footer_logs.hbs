@@ -1,0 +1,14 @@
+<script>
+    function downloadHandler() {
+        const url = window.location.href;
+        const urlArray = url.split('?');
+        if (urlArray.length == 1) { // no 'from' and 'to' dates are provided
+            window.location.href = url + '/download';
+        } else {
+            const params = urlArray[1];
+            window.location.href = '/topics/{{logvm.topicName}}/logs/download?' + params
+        }
+    }
+</script>
+
+<a onclick="downloadHandler()" id="download-btn" class="btn btn-primary mr-2" role="button">Download Logs</a>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %producer.getLogger{36} - %msg%n%xEx</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <producer.getLogger name="Loggable" level="off"/>
+
+    <root level="ERROR">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
