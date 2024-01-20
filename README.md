@@ -1,5 +1,7 @@
 # Kafka Tool
 
+![Alt text](image.png)
+
 ### TODO
 >Write clean and well-structured code to enable anyone from any domain to pick up project.
 
