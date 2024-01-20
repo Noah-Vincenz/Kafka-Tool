@@ -1,0 +1,70 @@
+{{! base.mustache }}
+<!DOCTYPE html>
+<html lang="en">
+<div id="header-content">
+{{$header}}{{/header}}
+</div>
+<script>
+    function filterHandler() {
+        const fromDate = document.getElementById('from-date').value;
+        const toDate = document.getElementById('to-date').value;
+        var fromTime = document.getElementById('from-time').value;
+        var toTime = document.getElementById('to-time').value;
+        if (fromTime === null || fromTime === "") {
+            fromTime = "000000"
+        } else {
+            fromTime = fromTime.replace(":", "")
+            fromTime += "00"
+        }
+        if (toTime === null || toTime === "") {
+            toTime = "235959"
+        } else {
+            toTime = toTime.replace(":", "")
+            toTime += "59"
+        }
+        const filter = document.getElementById('filter-input').value;
+        window.location.href = "/topics/{{logvm.topicName}}/logs?fromDate=" + fromDate + "&fromTime=" + fromTime + "&toDate=" + toDate + "&toTime=" + toTime + "&filter=" + filter;
+    }
+
+    function eventsButtonPressedHandler() {
+        const url = new URL(window.location.href);
+        const fromDate = url.searchParams.get("fromDate");
+        const toDate = url.searchParams.get("toDate");
+        const fromTime = url.searchParams.get("fromTime");
+        const toTime = url.searchParams.get("toTime");
+        var newUrl = "/topics/{{logvm.topicName}}"
+        if (fromDate !== null && toDate !== null) {
+            newUrl += "?fromDate=" + fromDate;
+            if (fromTime !== null) {
+                newUrl += "&fromTime=" + fromTime;
+            }
+            newUrl += "&toDate=" + toDate;
+            if (toTime !== null) {
+                newUrl += "&toTime=" + toTime;
+            }
+        }
+        window.location.href = newUrl;
+    }
+</script>
+<body onload = "setup()">
+<div id="main-content-top">
+    <div id="header-div">
+        <h5>Logs in this topic</h5>
+    </div>
+    <a class="btn btn-primary float-right mr-2 disabled" role="button">Logs</a>
+    <a onclick="eventsButtonPressedHandler()" class="btn btn-primary float-right mr-2" role="button">Events</a>
+    <label for="from">From:</label>
+    <input type="date" id="from-date" name="from-date">
+    <input type="time" id="from-time" name="from-time">
+    <label for="to">To:</label>
+    <input type="date" id="to-date" name="to-date">
+    <input type="time" id="to-time" name="to-time">
+    <input type="text" id="filter-input" name="filter-input"/>
+    <a onclick="filterHandler()" id="filter-btn" class="btn btn-primary mr-2" role="button">Filter</a>
+</div>
+<div id="main-content-bottom-logs" class="main-content-bottom">{{$content_logs}}{{/content_logs}}</div>
+<div id="footer-logs" class="footer">
+{{<footer_logs}}{{/footer_logs}}
+</div>
+</body>
+</html>

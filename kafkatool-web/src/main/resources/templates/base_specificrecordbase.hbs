@@ -1,0 +1,23 @@
+{{! base.mustache }}
+<!DOCTYPE html>
+<html lang="en">
+<div id="header-content">
+{{$header}}{{/header}}
+</div>
+<script>
+    function prettyPrint() {
+        var ugly = document.getElementById('specificrecordbase-input').value;
+        var obj = JSON.parse(ugly);
+        var pretty = JSON.stringify(obj, undefined, 4);
+        document.getElementById('specificrecordbase-input').value = pretty;
+    }
+</script>
+<body onload = "prettyPrint()">
+<div id="main-content-top-specific-record-base">
+    <div id="header-div">
+        <h5>Event to be sent</h5>
+    </div>
+</div>
+<div id="main-content-bottom-specific-record-base">{{$content_specificrecordbase}}{{/content_specificrecordbase}}</div>
+</body>
+</html>

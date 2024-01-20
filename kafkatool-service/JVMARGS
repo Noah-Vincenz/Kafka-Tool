@@ -1,0 +1,1 @@
+-Xms512m -Xmx1366m -Dspring.profiles.active=kafka,${EPAAS_ENV},ssl -Djava.security.egd=file:////dev/urandom

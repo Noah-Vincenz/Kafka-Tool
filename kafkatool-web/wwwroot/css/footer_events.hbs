@@ -1,0 +1,22 @@
+<script>
+    function validateForm() {
+        const eventName = document.getElementById('eventName-input').value;
+        if (isEmpty('eventName', eventName)) {
+            return false;
+        }
+        const urlArray = window.location.href.split("?")[0].split("/");
+        const topicName = urlArray[urlArray.length - 1];
+        if (!eventNameIsValid(eventName, topicName)) {
+           return false;
+        }
+//         setTimeout(function() {
+//             window.location.reload();
+//         }, 10);
+        return true;
+    }
+
+</script>
+<form action="" onsubmit="return validateForm()" method="POST">
+    <input type="text" id="eventName-input" name="eventName" placeholder="eventName"/>
+    <input type="submit" class="btn btn-primary mr-2 send-btn" name="send" value="Send Event"/>
+</form>

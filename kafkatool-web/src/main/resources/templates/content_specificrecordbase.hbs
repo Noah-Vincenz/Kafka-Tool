@@ -1,0 +1,19 @@
+{{<base_specificrecordbase}}
+    {{$header}}
+        {{<header}}
+            {{$title}}Kafka Tool{{/title}}
+        {{/header}}
+    {{/header}}
+
+    {{$content_specificrecordbase}}
+        <form id="form-specific-record-base" action="/topics/{{specificrecordbasevm.topicName}}/send" method="POST">
+        </form>
+        <textarea form="form-specific-record-base" id="specificrecordbase-input" name="specificrecordbase">{{specificrecordbasevm.specificRecordBase}}</textarea>
+        <input type="hidden" form="form-specific-record-base" name="fromDate" value="{{specificrecordbasevm.fromDate}}"/>
+        <input type="hidden" form="form-specific-record-base" name="toDate" value="{{specificrecordbasevm.toDate}}"/>
+        <input type="hidden" form="form-specific-record-base" name="fromTime" value="{{specificrecordbasevm.fromTime}}"/>
+        <input type="hidden" form="form-specific-record-base" name="toTime" value="{{specificrecordbasevm.toTime}}"/>
+        <input type="hidden" form="form-specific-record-base" name="eventname" value="{{specificrecordbasevm.eventName}}"/>
+        <input type="submit" form="form-specific-record-base" name="send" class="btn btn-primary mr-2 send-btn" value="Send Event"/>
+    {{/content_specificrecordbase}}
+{{/base_specificrecordbase}}
